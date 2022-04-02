@@ -13,10 +13,10 @@ router.get('/:search', async (req, res) => {
   res.json(data);
 });
 
-router.get('/forcast/:id', async (req, res) => {
+router.get('/forcast/:id/:metric', async (req, res) => {
   console.log(req.params.id);
   const response = await fetch(
-    `https://dataservice.accuweather.com/forecasts/v1/daily/5day/${req.params.id}?apikey=${process.env.API_KEY}&metric=true`
+    `https://dataservice.accuweather.com/forecasts/v1/daily/5day/${req.params.id}?apikey=${process.env.API_KEY}&metric=${req.params.metric}`
   );
   const data = await response.json();
   const newArr = data.DailyForecasts.map((item) => ({

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useReducer, useRef } from 'react';
 import { Header } from './components/Header';
 import { CityList } from './components/CityList';
 import { Card } from './components/Card';
@@ -6,11 +6,16 @@ import { Card } from './components/Card';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
+const reducer = (state, action) => {
+  return { val: !state.val };
+};
+
 function App() {
+  const [metric, dispatch] = useReducer(reducer, { val: true });
   const [search, setSearch] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [city, setCity] = useState('');
-  const [id, setId] = useState('');
+  const [id, setId] = useState('0');
   const [forcast, setForcast] = useState([]);
 
   useEffect(() => {
@@ -41,18 +46,23 @@ function App() {
     setInputValue('');
     setForcast('');
   };
+  const firstUpdate = useRef(true);
   useEffect(() => {
-    console.log('get city info');
-    fetch(`http://localhost:5000/api/forcast/${id}`)
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => setForcast(data));
-  }, [id, city]);
+    if (firstUpdate.current) {
+      firstUpdate.current = false;
+    } else {
+      console.log('get city info');
+      fetch(`http://localhost:5000/api/forcast/${id}/${metric.val}`)
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => setForcast(data));
+    }
+  }, [id, city, metric]);
 
   return (
     <div className='App'>
-      <Header />
+      <Header dispatch={dispatch} />
       <div className='search-bar'>
         <input
           type='text'
