@@ -1,0 +1,134 @@
+.App {
+  display: grid;
+  margin: 0 auto;
+  grid-template-columns: repeat(7, 1fr);
+  grid-auto-rows: minmax(100px, auto);
+  grid-gap: 30px;
+  grid-template-areas:
+    'header header header header header header header'
+    '.  search-bar search-bar search-bar search-bar search-bar  .'
+    '. forcast forcast forcast forcast forcast .';
+}
+@media screen and (min-width: 950px) {
+  .App {
+    display: grid;
+    margin: 0 auto;
+    grid-template-columns: repeat(7, 1fr);
+    grid-auto-rows: minmax(100px, auto);
+    grid-gap: 10px;
+    grid-template-areas:
+      'header header header header header header header'
+      '. . . . . . .'
+      '. . search-bar search-bar search-bar . .'
+      '. forcast forcast forcast forcast forcast .';
+  }
+}
+
+.header {
+  grid-area: header;
+  background-color: white;
+  border-bottom: 1px solid rgb(226 226 226);
+}
+.header-text {
+  font-family: Comfortaa, sans-serif;
+  color: #81a8e6;
+  font-size: 26px;
+  padding: 30px;
+}
+.search-bar {
+  grid-area: search-bar;
+  width: 100%;
+}
+input.search {
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+  padding: 0px 10px;
+  font-size: 16px;
+  font-family: Comfortaa, sans-serif;
+  outline: none !important;
+  border: 2px solid #36f;
+  box-shadow: 0 0 10px #94a2b0;
+}
+.autocomplete {
+  background-color: #f2f2f2;
+}
+.autocompleteItems {
+  min-height: 30px;
+  border-radius: 5px;
+  padding: 3px 10px;
+  font-size: 16px;
+  font-family: Comfortaa, sans-serif;
+}
+.autocompleteItems:hover {
+  background-color: #a3b7f2;
+}
+
+/* .App {
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-areas:
+      'header header header header header header header'
+      '. . . . . . .'
+      '. . search-bar search-bar search-bar . .'
+      '. forcast forcast forcast forcast forcast .';
+  } */
+.forcast {
+  font-family: Comfortaa, sans-serif;
+  font-size: 16px;
+  grid-area: forcast;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 20px;
+  row-gap: 12px;
+  grid-template-areas:
+    'city-name'
+    'forcast-card0'
+    'forcast-card1'
+    'forcast-card2'
+    'forcast-card3'
+    'forcast-card4';
+}
+
+@media screen and (min-width: 950px) {
+  .forcast {
+    font-family: Comfortaa, sans-serif;
+    font-size: 16px;
+    grid-area: forcast;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 20px;
+    row-gap: 65px;
+    grid-template-areas:
+      'city-name . . . .'
+      'forcast-card0 forcast-card1 forcast-card2 forcast-card3 forcast-card4';
+  }
+}
+.forcast-card0 {
+  grid-area: forcast-card0;
+}
+.forcast-card1 {
+  grid-area: forcast-card1;
+}
+.forcast-card2 {
+  grid-area: forcast-card2;
+}
+.forcast-card3 {
+  grid-area: forcast-card3;
+}
+.forcast-card4 {
+  grid-area: forcast-card4;
+}
+
+.city-name {
+  grid-area: city-name;
+}
+
+.forcast-cards {
+  padding: 34px 12px;
+  align-items: center;
+  border: 2px solid #edf0f8;
+  border-radius: 10px;
+  background-color: #aeecf8;
+  box-shadow: 0 0 13px -9px #000;
+  line-height: 36px;
+}
